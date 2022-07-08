@@ -25,6 +25,7 @@ const AddUsers = (props) => {
         title: "invalid age",
         message: "Please enter valid age (> 0).",
       });
+      return;
     }
 
     props.onSaveFormData(enteredUsername, enteredAge);
@@ -43,9 +44,21 @@ const AddUsers = (props) => {
     setEnteredAge(e.target.value);
   };
 
+  //error
+
+  const errorHandler = () => {
+    setError(null);
+  };
+
   return (
     <div>
-      {error && <ErrorModal title={error.title} message={error.message} />}
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
       <Card className={classes.input}>
         <form onSubmit={addUserHandler}>
           <label htmlFor="username">Username</label>
